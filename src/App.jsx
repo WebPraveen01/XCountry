@@ -3,6 +3,9 @@ import './App.css'
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [search,setSearch]=  useState("");
+  const performSearch= countries.filter((country)=>
+    country.name.toLowerCase().includes(search.trim().toLowerCase()))
   useEffect(() => {
     fetch('https://xcountries-backend.labs.crio.do/all')
       .then((response) => response.json())
@@ -29,8 +32,8 @@ function App() {
   return (
     <>
     <h1>Country wise Flage and Name</h1>
-     <div style ={containerStyle}>
-      {countries.map((country) => (
+     <div classname = "countryCard" style ={containerStyle}>
+      {performSearch.map((country) => (
         <div key={country.abbr} className={ImageStyle}>
           <img src={country.flag} alt={country.name} />
           <h2>{country.name}</h2>
