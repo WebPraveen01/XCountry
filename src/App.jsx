@@ -32,6 +32,7 @@ function App() {
   return (
     <>
     <h1>Country wise Flage and Name</h1>
+    <input type='text' value={search} onChange={(e)=>setSearch(e.target.value)} placeholder='Enter country name'/>
      <div classname = "countryCard" style ={containerStyle}>
       {performSearch.map((country) => (
         <div key={country.abbr} className={ImageStyle}>
