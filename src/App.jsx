@@ -8,7 +8,12 @@ function App() {
     country.name.toLowerCase().includes(search.trim().toLowerCase()))
   useEffect(() => {
     fetch('https://xcountries-backend.labs.crio.do/all')
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`)
+        }
+        return response.json()
+      })
       .then((data) => setCountries(data))
       .catch((error) => console.error('Error fetching data:', error))
   }, [])
@@ -21,30 +26,23 @@ function App() {
     padding:"20px"
 
   }
-  const ImageStyle ={
-    display:"flex",
-    flexDirection:"column",
-    alignItems:"center",
-    width:"100px",
-    height:"100px"
-  }
-
   return (
     <>
-    <h1>Country wise Flage and Name</h1>
-    <input type='text' value={search} onChange={(e)=>setSearch(e.target.value)} placeholder='Enter country name'/>
-     <div classname = "countryCard" style ={containerStyle}>
-      {performSearch.map((country) => (
-        <div key={country.abbr} className={ImageStyle}>
-          <img src={country.flag} alt={country.name} />
-          <h2>{country.name}</h2>
-        </div>
-      ))}
-     </div>
-
-     
-
-    
+      <h1>Country wise Flage and Name</h1>
+      <input
+        type='text'
+        value={search}
+        onChange={(event) => setSearch(event.target.value)}
+        placeholder='Enter country name'
+      />
+      <div className='countryCard' style={containerStyle}>
+        {performSearch.map((country) => (
+          <div className='country-card' key={country.abbr}>
+            <img className='country-flag' src={country.flag} alt={`${country.name} flag`} />
+            <h2>{country.name}</h2>
+          </div>
+        ))}
+      </div>
     </>
   )
 }

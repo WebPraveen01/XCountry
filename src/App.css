@@ -182,3 +182,29 @@
     border-right-color: var(--border);
   }
 }
+
+.country-card {
+  box-sizing: border-box;
+  width: 160px;
+  min-height: 160px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+}
+
+.country-flag {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.country-card h2 {
+  margin: 0;
+  font-size: 16px;
+}
